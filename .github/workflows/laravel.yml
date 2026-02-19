@@ -1,24 +1,25 @@
- 
 on:
   push:
     branches:
-      - develop   # or your deployment branch 
- 
+      - develop   # deploy branch
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
- 
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
- 
+
       - name: Upload files via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.FTP_SERVER }}
-          port: ${{ secrets.FTP_PORT }}
+          port: 22          # optional, default 22
           username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          password: ${{ secrets.FTP_PASSWORD }}   # use only if not using SSH key
+          # ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # uncomment if using SSH key instead of password
           local_path: './*'
-          remote_path: '/var/www/consumeraffairs'  # change to your actual deploy path
-          sftp_only: false
+          remote_path: '/var/www/consumeraffairs'
+          sftp_only: false                        # allows SSH commands to create directories
+          delete_remote_files: false
