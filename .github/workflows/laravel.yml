@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: FTP_SERVER   # <- yahan aapka environment name
-
+ 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
