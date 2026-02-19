@@ -2,7 +2,7 @@
 on:
   push:
     branches:
-      - develop   # or your deployment branch
+      - develop   # or your deployment branch 
  
 jobs:
   deploy:
