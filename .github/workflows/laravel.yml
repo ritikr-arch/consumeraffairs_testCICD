@@ -21,5 +21,5 @@ jobs:
           # ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # uncomment if using SSH key instead of password
           local_path: './*'
           remote_path: '/var/www/consumeraffairs'
-          sftp_only: false                        # allows SSH commands to create directories
+          sftp_only: true                        # allows SSH commands to create directories
           delete_remote_files: false
