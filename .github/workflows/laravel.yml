@@ -1,11 +1,14 @@
+name: Deploy via SFTP
+
 on:
   push:
     branches:
-      - develop   # deploy branch
+      - develop
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: FTP_SERVER   # <- yahan aapka environment name
 
     steps:
       - name: Checkout repository
@@ -15,11 +18,10 @@ jobs:
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.FTP_SERVER }}
-          port: 22          # optional, default 22
+          port: ${{ secrets.FTP_PORT }}
           username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}   # use only if not using SSH key
-          # ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # uncomment if using SSH key instead of password
+          password: ${{ secrets.FTP_PASSWORD }}
           local_path: './*'
           remote_path: '/var/www/consumeraffairs'
-          sftp_only: true                        # allows SSH commands to create directories
+          sftp_only: true
           delete_remote_files: false
